@@ -31,7 +31,8 @@ export async function POST(request: Request) {
   if (!name || name.length > 100) {
     return Response.json({ error: "invalid_name" }, { status: 400 });
   }
-  if (!EMAIL_PATTERN.test(email) || email.length > 200) {
+  // Length check first so the regex never runs on oversized input.
+  if (email.length > 200 || !EMAIL_PATTERN.test(email)) {
     return Response.json({ error: "invalid_email" }, { status: 400 });
   }
   if (message.length < 10 || message.length > 5000) {
@@ -48,8 +49,9 @@ export async function POST(request: Request) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      from: process.env.CONTACT_FROM_EMAIL ?? "Portfolio <onboarding@resend.dev>",
-      to: [process.env.CONTACT_TO_EMAIL ?? profile.email],
+      // `||` (not `??`) so an empty value in .env / Vercel falls back to the default.
+      from: process.env.CONTACT_FROM_EMAIL || "Portfolio <onboarding@resend.dev>",
+      to: [process.env.CONTACT_TO_EMAIL || profile.email],
       reply_to: email,
       // Strip newlines so a crafted name cannot inject extra headers.
       subject: `Portfolio message from ${name.replace(/[\r\n]+/g, " ")}`,

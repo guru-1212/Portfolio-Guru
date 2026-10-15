@@ -34,9 +34,6 @@ yarn-error.log*
 .env*
 !.env.example
 
-# resume PDF is kept local until a version without client names is ready
-/public/resume.pdf
-
 # vercel
 .vercel
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, type SubmitEvent } from "react";
 import { CircleAlert, LoaderCircle, Send } from "lucide-react";
 
 type Status = "idle" | "sending" | "sent" | "unavailable" | "error";
@@ -11,7 +11,7 @@ const fieldClass =
 export function ContactForm({ email }: { email: string }) {
   const [status, setStatus] = useState<Status>("idle");
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: SubmitEvent<HTMLFormElement>) {
     event.preventDefault();
     const form = event.currentTarget;
     const payload = Object.fromEntries(new FormData(form));
@@ -26,9 +26,14 @@ export function ContactForm({ email }: { email: string }) {
       if (response.ok) {
         setStatus("sent");
         form.reset();
+      } else if (response.status === 503) {
+        // No email provider configured yet: hand the message to the visitor's mail app instead.
+        const subject = `Portfolio message from ${String(payload.name ?? "")}`;
+        const body = `${String(payload.message ?? "")}\n\n— ${String(payload.name ?? "")} (${String(payload.email ?? "")})`;
+        window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        setStatus("unavailable");
       } else {
-        // 503 = server has no email provider configured yet.
-        setStatus(response.status === 503 ? "unavailable" : "error");
+        setStatus("error");
       }
     } catch {
       setStatus("error");
@@ -120,7 +125,7 @@ export function ContactForm({ email }: { email: string }) {
           <p className="flex items-start gap-2 text-amber-600 dark:text-amber-400">
             <CircleAlert className="mt-0.5 size-4 shrink-0" aria-hidden="true" />
             <span>
-              The form isn&apos;t connected yet. Please email me directly at{" "}
+              Your email app should have opened with your message ready to send. If it didn&apos;t, email me at{" "}
               <a href={`mailto:${email}`} className="font-medium underline underline-offset-2">
                 {email}
               </a>

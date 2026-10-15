@@ -1,6 +1,6 @@
 import { ArrowUp } from "lucide-react";
 import { profile } from "@/data/portfolio";
-import { GithubIcon, LinkedinIcon } from "./icons";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "./icons";
 import { Container } from "./section";
 
 export function Footer() {
@@ -27,6 +27,7 @@ export function Footer() {
             {[
               { href: profile.links.github, label: "GitHub profile", Icon: GithubIcon },
               { href: profile.links.linkedin, label: "LinkedIn profile", Icon: LinkedinIcon },
+              { href: profile.links.whatsapp, label: "Chat on WhatsApp", Icon: WhatsappIcon },
             ].map(({ href, label, Icon }) => (
               <a
                 key={label}

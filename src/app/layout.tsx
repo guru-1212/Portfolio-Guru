@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono, Sora } from "next/font/google";
 import { CursorGlow } from "@/components/effects/cursor-glow";
+import { WhatsappButton } from "@/components/whatsapp-button";
 import { profile } from "@/data/portfolio";
 import "./globals.css";
 
@@ -98,6 +99,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <CursorGlow />
         <div className="noise pointer-events-none fixed inset-0 z-[70]" aria-hidden="true" />
         {children}
+        <WhatsappButton />
       </body>
     </html>
   );

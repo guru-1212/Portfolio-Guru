@@ -2,12 +2,13 @@ import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
 import { profile } from "@/data/portfolio";
 import { ContactForm } from "../contact-form";
 import { SpotlightCard } from "../effects/spotlight-card";
-import { GithubIcon, LinkedinIcon } from "../icons";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "../icons";
 import { Reveal } from "../reveal";
 import { Section } from "../section";
 
 const channels = [
   { label: "Email", value: profile.email, href: `mailto:${profile.email}`, Icon: Mail, external: false },
+  { label: "WhatsApp", value: "Chat with me", href: profile.links.whatsapp, Icon: WhatsappIcon, external: true },
   { label: "Phone", value: profile.phone, href: profile.phoneHref, Icon: Phone, external: false },
   { label: "LinkedIn", value: "guru-tangawar", href: profile.links.linkedin, Icon: LinkedinIcon, external: true },
   { label: "GitHub", value: "guru-1212", href: profile.links.github, Icon: GithubIcon, external: true },
@@ -24,7 +25,7 @@ export function Contact() {
           Have a role or a project? <span className="gradient-text">Let&apos;s talk.</span>
         </>
       }
-      description="Send a message, give me a call, or connect on LinkedIn."
+      description="Send a message, ping me on WhatsApp, give me a call, or connect on LinkedIn."
     >
       <div className="grid gap-6 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
         <Reveal from="left">

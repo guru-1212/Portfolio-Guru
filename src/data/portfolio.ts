@@ -21,6 +21,9 @@ export const profile = {
     github: "https://github.com/guru-1212",
     linkedin: "https://linkedin.com/in/guru-tangawar-350b6625b",
     product: "https://ourpgtracker.in",
+    whatsapp: `https://wa.me/917522935014?text=${encodeURIComponent(
+      "Hi Gurunath, I came across your portfolio and would like to connect.",
+    )}`,
   },
   languages: ["English", "Hindi", "Marathi", "Kannada", "Telugu"],
 } as const;

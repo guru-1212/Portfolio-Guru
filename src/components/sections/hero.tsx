@@ -7,7 +7,7 @@ import { Magnetic } from "../effects/magnetic";
 import { ParticleField } from "../effects/particle-field";
 import { RotatingWords } from "../effects/rotating-words";
 import { SpotlightCard } from "../effects/spotlight-card";
-import { GithubIcon, LinkedinIcon } from "../icons";
+import { GithubIcon, LinkedinIcon, WhatsappIcon } from "../icons";
 import { Reveal } from "../reveal";
 import { Container } from "../section";
 
@@ -82,6 +82,7 @@ export function Hero() {
                   {[
                     { href: profile.links.github, label: "GitHub profile", Icon: GithubIcon },
                     { href: profile.links.linkedin, label: "LinkedIn profile", Icon: LinkedinIcon },
+                    { href: profile.links.whatsapp, label: "Chat on WhatsApp", Icon: WhatsappIcon },
                   ].map(({ href, label, Icon }) => (
                     <Magnetic key={label} strength={0.4}>
                       <a
