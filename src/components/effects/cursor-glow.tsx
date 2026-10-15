@@ -39,15 +39,17 @@ export function CursorGlow() {
     };
   }, []);
 
+  // The 700px light lives inside a viewport-sized clipping layer so it can never widen the page.
   return (
-    <div
-      ref={ref}
-      aria-hidden="true"
-      className="pointer-events-none fixed left-0 top-0 -z-10 size-[700px] rounded-full opacity-0 transition-opacity duration-700"
-      style={{
-        background:
-          "radial-gradient(circle, color-mix(in srgb, var(--accent) 12%, transparent), transparent 62%)",
-      }}
-    />
+    <div aria-hidden="true" className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+      <div
+        ref={ref}
+        className="absolute left-0 top-0 size-[700px] rounded-full opacity-0 transition-opacity duration-700"
+        style={{
+          background:
+            "radial-gradient(circle, color-mix(in srgb, var(--accent) 12%, transparent), transparent 62%)",
+        }}
+      />
+    </div>
   );
 }

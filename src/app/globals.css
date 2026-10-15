@@ -49,6 +49,8 @@ html {
   scroll-behavior: smooth;
   scroll-padding-top: 6rem;
   color-scheme: light;
+  /* Safety net: nothing may widen the page sideways (on phones that makes the browser zoom out). */
+  overflow-x: clip;
 }
 
 html.dark {

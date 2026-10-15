@@ -18,7 +18,7 @@ export function Writing() {
       }
       description="Practical write-ups on Angular architecture, state management and performance."
     >
-      <div className="grid gap-6 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {posts.slice(0, 2).map((post, index) => (
           <Reveal key={post.slug} delay={index * 0.08}>
             <PostCard post={post} />

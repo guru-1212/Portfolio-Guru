@@ -19,7 +19,7 @@ export function Credentials() {
         </>
       }
     >
-      <div className="grid gap-5 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         <Reveal from="left">
           <SpotlightCard tilt className={card}>
             <span className="flex size-12 items-center justify-center rounded-2xl bg-gradient-to-br from-accent to-accent-2 text-accent-contrast">

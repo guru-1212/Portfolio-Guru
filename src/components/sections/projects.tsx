@@ -42,7 +42,7 @@ function FeaturedProject({ project }: { project: Project }) {
     // Spinning conic gradient shows through the 1.5px padding as an animated border.
     <div className="animated-border rounded-[2rem] p-[1.5px] shadow-[0_30px_80px_-30px_var(--accent)]">
       <SpotlightCard className="overflow-hidden rounded-[calc(2rem-1.5px)] bg-surface">
-        <div className="grid lg:grid-cols-[1.05fr_1fr]">
+        <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr]">
           <div className="relative overflow-hidden bg-gradient-to-br from-accent/20 via-surface-2 to-accent-2/20">
             <div className="bg-grid absolute inset-0 opacity-60" aria-hidden="true" />
             {project.image ? (
@@ -158,7 +158,7 @@ export function Projects() {
             <FeaturedProject project={project} />
           </Reveal>
         ))}
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {others.map((project, index) => (
             <Reveal key={project.name} delay={index * 0.1}>
               <ProjectCard project={project} number={index + 2} />

@@ -47,7 +47,7 @@ export function ContactForm({ email }: { email: string }) {
       onSubmit={onSubmit}
       className="space-y-5 rounded-[calc(1.6rem-1.5px)] bg-surface p-6 sm:p-8"
     >
-      <div className="grid gap-5 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <div>
           <label htmlFor="name" className="mb-2 block text-sm font-medium">
             Name

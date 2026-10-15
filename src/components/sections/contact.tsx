@@ -27,9 +27,9 @@ export function Contact() {
       }
       description="Send a message, ping me on WhatsApp, give me a call, or connect on LinkedIn."
     >
-      <div className="grid gap-6 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_1.3fr] lg:gap-8">
         <Reveal from="left">
-          <ul className="grid gap-3 sm:grid-cols-2 lg:grid-cols-1">
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
             {channels.map(({ label, value, href, Icon, external }) => (
               <li key={label}>
                 <SpotlightCard className="rounded-2xl border border-border bg-surface/80 backdrop-blur">

@@ -19,7 +19,7 @@ export function Experience() {
       }
     >
       {experience.map((job) => (
-        <div key={`${job.company}-${job.period}`} className="grid gap-8 lg:grid-cols-[0.95fr_1.4fr] lg:gap-12">
+        <div key={`${job.company}-${job.period}`} className="grid grid-cols-1 gap-8 lg:grid-cols-[0.95fr_1.4fr] lg:gap-12">
           <div>
             <Reveal from="left" className="lg:sticky lg:top-28">
               <SpotlightCard className="rounded-3xl border border-border bg-surface/80 p-6 backdrop-blur sm:p-7">

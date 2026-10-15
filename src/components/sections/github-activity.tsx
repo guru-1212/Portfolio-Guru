@@ -27,7 +27,7 @@ export async function GithubActivity() {
       description="Live from my GitHub — refreshed automatically every hour."
     >
       {data ? (
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 lg:grid-cols-3">
           <Reveal className="lg:col-span-2">
             <SpotlightCard className={`${card} h-full p-6 sm:p-7`}>
               <div className="flex flex-wrap items-end justify-between gap-4">
@@ -96,7 +96,7 @@ export async function GithubActivity() {
               <Reveal>
                 <p className="mb-4 mt-4 font-mono text-sm text-muted">Recently active repositories</p>
               </Reveal>
-              <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 {data.repos.map((repo, index) => (
                   <li key={repo.name}>
                     <Reveal delay={(index % 3) * 0.07}>

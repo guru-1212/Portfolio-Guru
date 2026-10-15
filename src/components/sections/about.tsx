@@ -37,7 +37,7 @@ export function About() {
         </>
       }
     >
-      <div className="grid gap-4 lg:grid-cols-6">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-6">
         <Reveal className="lg:col-span-4 lg:row-span-2">
           <SpotlightCard className={`${card} flex flex-col justify-between`}>
             <div className="space-y-5 text-lg leading-relaxed text-muted">
