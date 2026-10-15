@@ -1,0 +1,7 @@
+# Never apply line-ending conversion to binary assets (protects the resume PDF and images).
+*.pdf binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
