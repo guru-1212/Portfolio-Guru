@@ -45,12 +45,17 @@ export const metadata: Metadata = {
   authors: [{ name: profile.name, url: profile.links.linkedin }],
   openGraph: {
     type: "website",
+    url: "/",
     title,
     description,
     siteName: profile.name,
     locale: "en_IN",
   },
   twitter: { card: "summary_large_image", title, description },
+  // Google Search Console "HTML tag" verification: set GOOGLE_SITE_VERIFICATION in Vercel.
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export const viewport: Viewport = {

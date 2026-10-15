@@ -8,6 +8,17 @@ import { posts } from "@/data/posts";
 export const metadata: Metadata = {
   title: "Blog",
   description: "Notes on Angular architecture, state management and frontend performance.",
+  alternates: { canonical: "/blog" },
+  // A page-level openGraph replaces the layout's entirely, so it is spelled out in full.
+  openGraph: {
+    type: "website",
+    url: "/blog",
+    title: "Blog · Gurunath Tangawar",
+    description: "Notes on Angular architecture, state management and frontend performance.",
+    siteName: "Gurunath Tangawar",
+    locale: "en_IN",
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: "Gurunath Tangawar — Frontend Angular Developer" }],
+  },
 };
 
 export default function BlogPage() {

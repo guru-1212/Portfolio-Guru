@@ -20,7 +20,17 @@ export async function generateMetadata({ params }: PageProps<"/blog/[slug]">): P
   return {
     title: post.title,
     description: post.description,
-    openGraph: { type: "article", title: post.title, description: post.description },
+    alternates: { canonical: `/blog/${post.slug}` },
+    openGraph: {
+      type: "article",
+      title: post.title,
+      description: post.description,
+      url: `/blog/${post.slug}`,
+      publishedTime: post.date,
+      authors: [profile.name],
+      // A page-level openGraph drops the root share image, so reference it explicitly.
+      images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `${profile.name} — ${profile.role}` }],
+    },
   };
 }
 

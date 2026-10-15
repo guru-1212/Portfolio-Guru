@@ -16,7 +16,8 @@ export const profile = {
   // Path in /public; set to null to fall back to the initials avatar.
   photo: "/profile.jpg" as string | null,
   resumeUrl: "/resume.pdf",
-  siteUrl: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  // Production URL. Override with NEXT_PUBLIC_SITE_URL (e.g. a custom domain later).
+  siteUrl: process.env.NEXT_PUBLIC_SITE_URL || "https://portfolio-guru-delta.vercel.app",
   links: {
     github: "https://github.com/guru-1212",
     linkedin: "https://linkedin.com/in/guru-tangawar-350b6625b",
