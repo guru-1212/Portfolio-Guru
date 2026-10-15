@@ -3,8 +3,9 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatePresence, motion } from "motion/react";
-import { Download, Menu, X } from "lucide-react";
+import { Download, Menu, Search, X } from "lucide-react";
 import { navItems, profile } from "@/data/portfolio";
+import { openCommandPalette, useModifierKey } from "./command-palette";
 import { ScrollProgress } from "./effects/scroll-progress";
 import { ThemeToggle } from "./theme-toggle";
 
@@ -18,6 +19,7 @@ export function Header({ current }: Readonly<HeaderProps>) {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("");
   const [scrolled, setScrolled] = useState(false);
+  const modKey = useModifierKey();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -114,6 +116,15 @@ export function Header({ current }: Readonly<HeaderProps>) {
               <Download className="relative size-4" aria-hidden="true" />
               <span className="relative">Resume</span>
             </a>
+            <button
+              type="button"
+              onClick={openCommandPalette}
+              aria-label="Open command palette"
+              className="inline-flex h-10 items-center gap-2 rounded-full border border-border bg-surface px-3 text-sm text-muted transition-colors hover:border-accent/60 hover:text-foreground"
+            >
+              <Search className="size-[18px]" aria-hidden="true" />
+              <kbd className="hidden font-mono text-xs xl:inline">{modKey} K</kbd>
+            </button>
             <ThemeToggle />
             <button
               type="button"

@@ -2,6 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import type { ReactNode } from "react";
+import { introDelay } from "@/lib/intro";
 
 type RevealProps = {
   children: ReactNode;
@@ -31,7 +32,12 @@ export function Reveal({
 
   const hidden = { opacity: 0, ...offsets[from], ...(blur ? { filter: "blur(10px)" } : {}) };
   const shown = { opacity: 1, x: 0, y: 0, ...(blur ? { filter: "blur(0px)" } : {}) };
-  const transition = { duration: 0.7, delay, ease: [0.22, 1, 0.36, 1] as const };
+  // Above-the-fold content waits for the first-visit intro to finish.
+  const transition = {
+    duration: 0.7,
+    delay: delay + (immediate ? introDelay() : 0),
+    ease: [0.22, 1, 0.36, 1] as const,
+  };
 
   return immediate ? (
     <motion.div className={className} initial={hidden} animate={shown} transition={transition}>

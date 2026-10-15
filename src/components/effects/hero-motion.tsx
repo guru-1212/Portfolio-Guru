@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import { introDelay } from "@/lib/intro";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
@@ -8,6 +9,7 @@ const ease = [0.22, 1, 0.36, 1] as const;
 // (background-clip: text doesn't survive per-letter transforms, so it animates whole).
 export function HeroName({ first, last }: { first: string; last: string }) {
   const reduce = useReducedMotion();
+  const offset = introDelay();
 
   if (reduce) {
     return (
@@ -30,7 +32,7 @@ export function HeroName({ first, last }: { first: string; last: string }) {
             className="inline-block"
             initial={{ y: "110%", rotate: 10, opacity: 0 }}
             animate={{ y: "0%", rotate: 0, opacity: 1 }}
-            transition={{ duration: 0.75, delay: 0.15 + index * 0.045, ease }}
+            transition={{ duration: 0.75, delay: offset + 0.15 + index * 0.045, ease }}
           >
             {char}
           </motion.span>
@@ -41,7 +43,7 @@ export function HeroName({ first, last }: { first: string; last: string }) {
           className="gradient-text inline-block"
           initial={{ y: "110%", opacity: 0 }}
           animate={{ y: "0%", opacity: 1 }}
-          transition={{ duration: 0.9, delay: 0.5, ease }}
+          transition={{ duration: 0.9, delay: offset + 0.5, ease }}
         >
           {last}
         </motion.span>
@@ -61,6 +63,7 @@ export function FloatingBadge({
   delay?: number;
 }) {
   const reduce = useReducedMotion();
+  const offset = introDelay();
 
   return (
     <motion.span
@@ -76,9 +79,9 @@ export function FloatingBadge({
         reduce
           ? undefined
           : {
-              opacity: { duration: 0.5, delay: 1 + delay * 0.25 },
-              scale: { duration: 0.5, delay: 1 + delay * 0.25, type: "spring", stiffness: 260, damping: 18 },
-              y: { duration: 4 + delay * 0.4, repeat: Infinity, ease: "easeInOut", delay },
+              opacity: { duration: 0.5, delay: offset + 1 + delay * 0.25 },
+              scale: { duration: 0.5, delay: offset + 1 + delay * 0.25, type: "spring", stiffness: 260, damping: 18 },
+              y: { duration: 4 + delay * 0.4, repeat: Infinity, ease: "easeInOut", delay: offset + delay },
             }
       }
     >

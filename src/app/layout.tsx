@@ -1,4 +1,6 @@
+import { Suspense } from "react";
 import type { Metadata, Viewport } from "next";
+import { CommandPalette } from "@/components/command-palette";
 import { Geist, Geist_Mono, Sora } from "next/font/google";
 import { CursorGlow } from "@/components/effects/cursor-glow";
 import { WhatsappButton } from "@/components/whatsapp-button";
@@ -59,7 +61,9 @@ export const viewport: Viewport = {
 };
 
 // Runs before first paint so the saved theme never flashes. Dark is the default.
-const themeScript = `(function(){try{var t=localStorage.getItem('theme');if(t!=='light'){document.documentElement.classList.add('dark');}}catch(e){document.documentElement.classList.add('dark');}})();`;
+// Also starts the intro overlay once per browser session, on the home page only,
+// and removes the flag when the overlay has finished (see IntroOverlay / lib/intro.ts).
+const themeScript = `(function(){var d=document.documentElement;try{var t=localStorage.getItem('theme');if(t!=='light'){d.classList.add('dark');}}catch(e){d.classList.add('dark');}try{if(location.pathname==='/'&&!sessionStorage.getItem('intro-seen')&&!matchMedia('(prefers-reduced-motion: reduce)').matches){d.classList.add('intro-play');sessionStorage.setItem('intro-seen','1');setTimeout(function(){d.classList.remove('intro-play');},2100);}}catch(e){}})();`;
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -100,6 +104,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="noise pointer-events-none fixed inset-0 z-[70]" aria-hidden="true" />
         {children}
         <WhatsappButton />
+        {/* Reads the current path, so it sits behind Suspense (required by Cache Components). */}
+        <Suspense fallback={null}>
+          <CommandPalette />
+        </Suspense>
       </body>
     </html>
   );

@@ -11,7 +11,7 @@ export function Credentials() {
   return (
     <Section
       id="education"
-      index="05"
+      index="06"
       eyebrow="Education"
       title={
         <>
