@@ -1,0 +1,279 @@
+@import "tailwindcss";
+
+/* Class-based dark mode: <html class="dark"> (set by the inline script in layout.tsx). */
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: #f6f6fb;
+  --foreground: #0c0c14;
+  --muted: #585870;
+  --surface: #ffffff;
+  --surface-2: #eeeef7;
+  --border: #dcdcea;
+  --accent: #5b4cf0;
+  --accent-2: #0891b2;
+  --accent-3: #d946ef;
+  --accent-contrast: #ffffff;
+}
+
+.dark {
+  --background: #05050a;
+  --foreground: #eeeef5;
+  --muted: #9c9cb4;
+  --surface: #0d0d16;
+  --surface-2: #151522;
+  --border: #23233a;
+  --accent: #8b93ff;
+  --accent-2: #22d3ee;
+  --accent-3: #e879f9;
+  --accent-contrast: #05050a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-contrast: var(--accent-contrast);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-sora);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: clip;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 35%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* ---------- Text effects ---------- */
+
+.gradient-text {
+  background-image: linear-gradient(110deg, var(--accent), var(--accent-2) 50%, var(--accent-3), var(--accent));
+  background-size: 250% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-pan 8s linear infinite;
+}
+
+@keyframes gradient-pan {
+  to {
+    background-position: 250% 0;
+  }
+}
+
+/* Large outlined watermark text (footer). */
+.outline-text {
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--foreground) 14%, transparent);
+}
+
+/* ---------- Backgrounds ---------- */
+
+.bg-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--foreground) 6%, transparent) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 35%, #000 25%, transparent 75%);
+}
+
+.aurora {
+  position: absolute;
+  border-radius: 9999px;
+  filter: blur(80px);
+  opacity: 0.55;
+  will-change: transform;
+}
+
+.dark .aurora {
+  opacity: 0.4;
+}
+
+.aurora-1 {
+  background: var(--accent);
+  animation: aurora-1 18s ease-in-out infinite alternate;
+}
+.aurora-2 {
+  background: var(--accent-2);
+  animation: aurora-2 22s ease-in-out infinite alternate;
+}
+.aurora-3 {
+  background: var(--accent-3);
+  animation: aurora-3 26s ease-in-out infinite alternate;
+}
+
+@keyframes aurora-1 {
+  0% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(18vw, 8vh) scale(1.25); }
+  100% { transform: translate(6vw, -6vh) scale(0.9); }
+}
+@keyframes aurora-2 {
+  0% { transform: translate(0, 0) scale(1.1); }
+  50% { transform: translate(-16vw, 12vh) scale(0.85); }
+  100% { transform: translate(-4vw, -8vh) scale(1.2); }
+}
+@keyframes aurora-3 {
+  0% { transform: translate(0, 0) scale(0.9); }
+  50% { transform: translate(10vw, -10vh) scale(1.2); }
+  100% { transform: translate(-12vw, 6vh) scale(1); }
+}
+
+/* Film grain over the whole page. */
+.noise {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  opacity: 0.035;
+}
+
+.dark .noise {
+  opacity: 0.05;
+}
+
+/* ---------- Animated gradient borders ---------- */
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+.spin-ring {
+  background: conic-gradient(from var(--angle), var(--accent), var(--accent-2), var(--accent-3), transparent 70%, var(--accent));
+  animation: spin-angle 6s linear infinite;
+}
+
+.animated-border {
+  background:
+    conic-gradient(from var(--angle), transparent 0%, var(--accent) 12%, var(--accent-2) 22%, transparent 34%, transparent 50%, var(--accent-3) 62%, var(--accent) 72%, transparent 84%)
+    border-box;
+  animation: spin-angle 7s linear infinite;
+}
+
+@keyframes spin-angle {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* ---------- Pointer spotlight cards ---------- */
+/* --mx / --my are set by <SpotlightCard> on pointer move. */
+
+.spotlight {
+  position: relative;
+  isolation: isolate;
+}
+
+.spotlight::before,
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.spotlight::before {
+  z-index: -1;
+  background: radial-gradient(
+    480px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 13%, transparent),
+    transparent 45%
+  );
+}
+
+.spotlight::after {
+  padding: 1px;
+  background: radial-gradient(
+    320px circle at var(--mx, 50%) var(--my, 50%),
+    color-mix(in srgb, var(--accent) 85%, transparent),
+    transparent 45%
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+
+.spotlight:hover::before,
+.spotlight:hover::after {
+  opacity: 1;
+}
+
+/* ---------- Marquee ---------- */
+
+.marquee-track {
+  animation: marquee var(--duration, 40s) linear infinite;
+}
+
+.marquee-reverse {
+  animation-direction: reverse;
+}
+
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* ---------- Scroll hint ---------- */
+
+@keyframes scroll-dot {
+  0% { transform: translateY(0); opacity: 1; }
+  70% { transform: translateY(12px); opacity: 0; }
+  100% { transform: translateY(0); opacity: 0; }
+}
+
+.scroll-dot {
+  animation: scroll-dot 1.8s ease-in-out infinite;
+}
+
+/* ---------- Reduced motion: switch every decorative animation off ---------- */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .gradient-text,
+  .aurora,
+  .spin-ring,
+  .animated-border,
+  .marquee-track,
+  .scroll-dot {
+    animation: none !important;
+  }
+}
